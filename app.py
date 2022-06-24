@@ -15,22 +15,30 @@ def callback():
     st.session_state.button_clicked = True
 
 
-def tb_home():
+def __main__():
     st.title("Prediction of Tuberculosis using Chest X-Ray Images")
     image = Image.open("img_path")
     st.image(image, caption=None, width=700)
+
     st.write("")
 
     if (st.button('Predict Tuberculosis', key='Tuberculosis', on_click=callback) or st.session_state.button_clicked):
         predict_tuberculosis()
 
 
+def loading_model():
+    fp = "/content/cnn_tuberculosis_model.h5"
+    model_loader = load_model(fp)
+    return model_loader
+
+
 def predict_tuberculosis():
     st.set_option('deprecation.showfileUploaderEncoding', False)
 
     @st.cache(allow_output_mutation=True)
-    cnn = load_model(
-        "/home/ayushman/Desktop/MLStuff/cnn_tuberculosis_model.h5")
+    cnn = loading_model()
+
+    #cnn = load_model("/content/cnn_tuberculosis_model.h5")
 
     file = st.file_uploader("Upload X-Ray Image")
 
@@ -65,3 +73,6 @@ def predict_tuberculosis():
 
         image = Image.open(upload_file)
         st.image(image, use_column_width=True)
+
+
+__main__()
