@@ -18,8 +18,8 @@ def callback():
 
 def __main__():
     st.title("Prediction of Tuberculosis using Chest X-Ray Images")
-    image = Image.open("pic.jpg")
-    st.image(image, caption=None, width=700)
+    descImage = Image.open("pic.jpg")
+    st.image(descImage, caption=None, width=700)
 
     st.write("")
 
@@ -74,8 +74,8 @@ def predict_tuberculosis():
 
         st.success(out)
 
-        image = Image.open(temp)
-        st.image(image, use_column_width=True)
+        tempImage = Image.open(temp_file)
+        st.image(tempImage, use_column_width=True)
 
     # file = st.file_uploader("Upload X-Ray Image")
 
